@@ -31,7 +31,7 @@ public class MainController implements Initializable {
     public void onAbrir(ActionEvent actionEvent) {
         FileChooser fileChooser;
         fileChooser= new FileChooser();
-        fileChooser.setInitialDirectory(new File("d://"));
+        fileChooser.setInitialDirectory(new File("c://"));
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("Todas Imagens","*.jpg","*.png",
                         "*.bmp","*.jpeg","*.webp"),
@@ -43,8 +43,8 @@ public class MainController implements Initializable {
         if(file!=null){
             Image image = new Image(file.toURI().toString());
             imageView.setImage(image);
-            imageView.setFitWidth(1920);
-            imageView.setFitHeight(1350);
+            imageView.setFitWidth(image.getWidth()+400);
+            imageView.setFitHeight(image.getHeight()+300);
         }
     }
 
@@ -56,5 +56,23 @@ public class MainController implements Initializable {
 
     public void onSair(ActionEvent actionEvent) {
         Platform.exit();
+    }
+
+    public void onTonsCinza(ActionEvent actionEvent) {
+        Image image = imageView.getImage();
+        image = Conversora.tonsCinza(image);
+        imageView.setImage(image);
+    }
+
+    public void onPretoBranco(ActionEvent actionEvent) {
+        Image image = imageView.getImage();
+        image = Conversora.PretoBranco(image);
+        imageView.setImage(image);
+    }
+
+    public void onEspelharHorizontal(ActionEvent actionEvent) {
+        Image image = imageView.getImage();
+        image= Conversora.Espelhar(image);
+        imageView.setImage(image);
     }
 }
